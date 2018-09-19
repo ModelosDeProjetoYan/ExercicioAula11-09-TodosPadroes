@@ -23,7 +23,7 @@ class IndexCommand implements Command {
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         {
-                RequestDispatcher dispachante = request.getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispachante = request.getRequestDispatcher("WEB-INF/index.jsp");
                 ArrayList<Aluno> alunos = new ArrayList<>();
                 alunos =AlunoDao.getInstance().getAlunosBanco(); 
                 request.setAttribute("alunos",

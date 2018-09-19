@@ -1,7 +1,5 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="Cabecalho/cabecalhojsp.jsp" %>
+<%@include file="../Cabecalho/cabecalhojsp.jsp" %>
 <h1>Lista de Alunos</h1>
 <table border="1">
     <thead>
@@ -9,8 +7,8 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Matricula</th>
-            <th>SituaÃ§Ã£o Atual</th>
-            <th>OperaÃ§Ãµes</th>
+            <th>Situação Atual</th>
+            <th>Operações</th>
         </tr>
     </thead>
     <tbody>
@@ -32,4 +30,4 @@
         </c:forEach>
     </tbody>
 </table>
-<%@include file="Cabecalho/rodape.jspf" %>
+<%@include file="../Cabecalho/rodape.jspf" %>

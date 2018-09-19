@@ -34,7 +34,7 @@ public class GravarAlunoAction implements Action {
             response.sendRedirect("Cadastrojsp.jsp");
         } else {
             try {
-                RequestDispatcher dispachante = request.getRequestDispatcher("index.jsp");
+                RequestDispatcher dispachante = request.getRequestDispatcher("WEB-INF/index.jsp");
                 Aluno aluno = new Aluno();
                 aluno.setMatricula(matricula);
                 aluno.setNome(nome);
