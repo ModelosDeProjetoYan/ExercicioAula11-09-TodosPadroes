@@ -13,7 +13,7 @@ public class AlunoFormado implements AlunoEstado{
     
 
     public String getStado() {
-        return "Aluno Formado";
+        return "Formado";
     }
 
     public void setMatriculado(Aluno a) {

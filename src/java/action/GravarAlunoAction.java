@@ -25,14 +25,16 @@ public class GravarAlunoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String nome = request.getParameter("textNome");
-        String email = request.getParameter("textSenha");
-        if (nome.equals("") || email.equals("")) {
-            response.sendRedirect("index.jsp");
+        String matricula = request.getParameter("textMatricula");
+        if (nome.equals("") || matricula.equals("")) {
+            response.sendRedirect("Cadastrojsp.jsp");
         } else {
             try {
                 Aluno aluno = new Aluno();
+                aluno.setMatricula(matricula);
+                aluno.setNome(nome);
                 AlunoDao.getInstance().save(aluno);
-                response.sendRedirect("alunoCadastrado.jsp");
+                response.sendRedirect("index.jsp");
             } catch (SQLException ex) {
                 response.sendRedirect("erroAoCadastrar.jsp");
                 ex.printStackTrace();

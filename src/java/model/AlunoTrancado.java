@@ -10,10 +10,8 @@ package model;
  * @author YanNotebook
  */
 public class AlunoTrancado implements AlunoEstado{
-    String statusAtual;
     public void setMatriculado(Aluno a) {
         a.setStatus(new AlunoMatriculado());
-        statusAtual = "Matriculado";
     }
 
     @Override
@@ -28,7 +26,7 @@ public class AlunoTrancado implements AlunoEstado{
 
     @Override
     public String getStado() {
-        return "Aluno Trancado";
+        return "Trancado";
     }
     
 }

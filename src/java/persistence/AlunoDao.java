@@ -33,9 +33,6 @@ public class AlunoDao {
     public void save(Aluno aluno) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        Connection conn2 = null;
-        Statement st2 = null;
-        ResultSet resultado;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -44,11 +41,7 @@ public class AlunoDao {
                     + " values ('" + aluno.getNome() + ","
                     + aluno.getMatricula() + "," + aluno.getStado() + "'");
 
-            conn2 = DatabaseLocator.getInstance().getConnection();
-            st2 = conn2.createStatement();
-            resultado = st2.executeQuery("select ID from USUARIO where('" + aluno.getNome()
-                    + " == nome AND " + aluno.getMatricula() + "== matricula ')");
-            aluno.setId(resultado.getInt("ID"));
+            
         } catch (SQLException e) {
             throw e;
         } finally {

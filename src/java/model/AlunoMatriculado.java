@@ -12,7 +12,7 @@ package model;
 public class AlunoMatriculado implements AlunoEstado {
    
     public String getStado() {
-        return "Aluno Matriculado";
+        return "Matriculado";
     }
 
     public void setMatriculado(Aluno a) {

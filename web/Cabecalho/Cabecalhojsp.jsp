@@ -22,8 +22,8 @@
         <aside>
             <menu>
                 <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="index.jsp">Home</a></li>
+                <li><a href="Cadastrojsp.jsp">Cadastrar</a></li>
                 </ul>
             </menu>
         </aside>
