@@ -6,10 +6,12 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Aluno;
 import persistence.AlunoDao;
 
 /**
@@ -22,8 +24,10 @@ class IndexCommand implements Command {
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         {
                 RequestDispatcher dispachante = request.getRequestDispatcher("/index.jsp");
+                ArrayList<Aluno> alunos = new ArrayList<>();
+                alunos =AlunoDao.getInstance().getAlunosBanco(); 
                 request.setAttribute("alunos",
-                        AlunoDao.getInstance().getAlunosBanco());      
+                         alunos);      
                 dispachante.forward(request, response);
          
         }

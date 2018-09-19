@@ -13,13 +13,13 @@
             <th>Operações</th>
         </tr>
     </thead>
-    <c:forEach var="aluno" items="${alunos}">
-        <tbody>
+    <tbody>
+        <c:forEach var="aluno" items="${alunos}">
             <tr>
                 <td>${aluno.getId()}</td>
                 <td>${aluno.getNome()}</td>
                 <td>${aluno.getMatricula()}</td>
-                <td>${aluno.getStatus()}</td>
+                <td>${aluno.getStado()}</td>
                 <td>
                     <form action="FrontController?action=GravarContato" method="post">
                         <input name= "matricular" type="submit"/>
@@ -29,7 +29,7 @@
                     </form>
                 </td>
             </tr>
-        </tbody>
-    </table>
-</c:forEach>
+        </c:forEach>
+    </tbody>
+</table>
 <%@include file="Cabecalho/rodape.jspf" %>

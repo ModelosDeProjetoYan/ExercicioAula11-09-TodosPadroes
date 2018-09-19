@@ -6,7 +6,7 @@
 package action;
 
 import controller.*;
-import model.AlunoEstado;
+import model.*;
 
 /**
  *
@@ -15,7 +15,7 @@ import model.AlunoEstado;
 public class ActionFactoryState {
     public static AlunoEstado create(String action){
         AlunoEstado actionObject = null;
-        String nomeClasse = "Aluno"+action;
+        String nomeClasse = "model.Aluno"+action;
         Class classe = null;
         Object objeto = null;
         try {

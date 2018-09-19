@@ -37,9 +37,9 @@ public class AlunoDao {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
 
-            st.execute("insert into USUARIO (nome, matricula,situacao)"
-                    + " values ('" + aluno.getNome() + ","
-                    + aluno.getMatricula() + "," + aluno.getStado() + "'");
+            st.execute("insert into USUARIO (NOME, MATRICULA, SITUACAO)"
+                    + " values ('" + aluno.getNome() + "','"
+                    + aluno.getMatricula() + "','" + aluno.getStado() + "')");
 
             
         } catch (SQLException e) {
