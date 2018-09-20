@@ -1,6 +1,7 @@
 package model;
 public class AlunoMemento {
     private AlunoEstado estado;
+    
 
     public AlunoMemento(AlunoEstado estado) {
         this.estado = estado;

@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author YanNotebook
@@ -18,6 +20,7 @@ public class Aluno {
         status = new AlunoMatriculado();
     }
 
+    
     public String getMatricula() {
         return matricula;
     }

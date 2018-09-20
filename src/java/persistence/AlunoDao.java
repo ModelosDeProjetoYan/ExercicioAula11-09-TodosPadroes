@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import model.Aluno;
 import action.ActionFactoryState;
 import model.AlunoEstado;
+import model.AlunoMemento;
+import model.Historico;
+
 /**
  *
  * @author YanNotebook
@@ -22,6 +25,8 @@ import model.AlunoEstado;
 public class AlunoDao {
 
     private static AlunoDao instance = new AlunoDao();
+    private ArrayList<Historico> mementos = new ArrayList<>();
+    private AlunoEstado action = null;
 
     private AlunoDao() {
     }
@@ -41,7 +46,6 @@ public class AlunoDao {
                     + " values ('" + aluno.getNome() + "','"
                     + aluno.getMatricula() + "','" + aluno.getStado() + "')");
 
-            
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -57,6 +61,8 @@ public class AlunoDao {
             st = conn.createStatement();
             st.executeUpdate("update USUARIO set SITUACAO = '" + estado
                     + "' where(id = " + id + ")");
+            mementos.get(testaSePossuiHistorico(id)).setEstadosSalvos(new AlunoMemento(action = ActionFactoryState.create(estado)));
+
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -68,20 +74,24 @@ public class AlunoDao {
         ArrayList alunos = new ArrayList<>();
         Connection conn = null;
         Statement st = null;
-        AlunoEstado action = null;
         ResultSet resultado;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             resultado = st.executeQuery("select * from USUARIO");
-            while(resultado.next()){
+            while (resultado.next()) {
                 Aluno a = new Aluno();
                 a.setId(resultado.getInt("ID"));
-                a.setStatus(action = 
-                        ActionFactoryState.create(resultado.getString("SITUACAO")));
+                a.setStatus(action
+                        = ActionFactoryState.create(resultado.getString("SITUACAO")));
                 a.setMatricula(resultado.getString("MATRICULA"));
                 a.setNome(resultado.getString("NOME"));
-                alunos.add(a);                
+                alunos.add(a);
+                if (testaSePossuiHistorico(resultado.getInt("ID")) == mementos.size()) {
+                    Historico h = new Historico(resultado.getInt("ID"));
+                    h.setEstadosSalvos(a.saveToMemento());
+                    mementos.add(h);
+                }
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,7 +101,13 @@ public class AlunoDao {
         }
         return alunos;
     }
-    
+
+    public int testaSePossuiHistorico(int id) {
+        int i;
+        for (i = 0; mementos.get(i).getId() != id && i < mementos.size() - 1; i++);
+        return i;
+    }
+
     private void closeResoucers(Connection conn, Statement st) {
         try {
             if (st != null) {
