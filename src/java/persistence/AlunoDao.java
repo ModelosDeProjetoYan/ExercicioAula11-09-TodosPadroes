@@ -49,14 +49,14 @@ public class AlunoDao {
         }
     }
 
-    public void saveEstado(Aluno aluno) throws SQLException, ClassNotFoundException {
+    public void saveEstado(int id, String estado) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("update USUARIO set SITUACAO = '" + aluno.getStado()
-                    + "' where(id = " + aluno.getId() + ")");
+            st.executeUpdate("update USUARIO set SITUACAO = '" + estado
+                    + "' where(id = " + id + ")");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -91,7 +91,7 @@ public class AlunoDao {
         }
         return alunos;
     }
-
+    
     private void closeResoucers(Connection conn, Statement st) {
         try {
             if (st != null) {

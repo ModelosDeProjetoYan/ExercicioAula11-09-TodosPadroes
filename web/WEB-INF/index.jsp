@@ -19,11 +19,23 @@
                 <td>${aluno.getMatricula()}</td>
                 <td>${aluno.getStado()}</td>
                 <td>
-                    <form action="FrontController?action=GravarContato" method="post">
-                        <input name= "matricular" type="submit"/>
-                        <input name= "Trancar" type="submit"/>
-                        <input name= "matricular" type="submit"/>
-                        <input name= "matricular" type="submit"/>
+                    <form action="FrontController?action=MatricularAluno" method="post">
+                        <input name= "Matricular" value="matricular" type="submit"/>
+                        <input type="hidden" name="id" value="${aluno.getId()}">
+                    </form>
+                    <form action="FrontController?action=TrancarAluno" method="post">
+                        <input name= "Trancar" value="Trancar" type="submit"/>
+                        <input type="hidden" name="id" value="${aluno.getId()}">
+                    
+                    </form>
+                    <form action="FrontController?action=FormarAluno" method="post">
+                        <input name= "Formar" value="Formar" type="submit"/>
+                        <input type="hidden" name="id" value="${aluno.getId()}">
+                    
+                    </form>
+                    <form action="FrontController?action=HistoricoAluno" method="post">
+                        <input name= "Historico"  value="Historico" type="submit"/>
+                        <input type="hidden" name="id" value="${aluno.getId()}">
                     </form>
                 </td>
             </tr>
