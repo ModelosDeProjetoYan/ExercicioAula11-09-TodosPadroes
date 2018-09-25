@@ -33,8 +33,12 @@
                         <input type="hidden" name="id" value="${aluno.getId()}">
                     
                     </form>
-                    <form action="FrontController?action=HistoricoAluno" method="post">
-                        <input name= "Historico"  value="Historico" type="submit"/>
+                    <form action="FrontController?action=VoltarAluno" method="post">
+                        <input name= "btnVoltar"  value="Voltar" type="submit"/>
+                        <input type="hidden" name="id" value="${aluno.getId()}">
+                    </form>
+                    <form action="FrontController?action=AvancarAluno" method="post">
+                        <input name= "btnAvancar"  value="Avancar" type="submit"/>
                         <input type="hidden" name="id" value="${aluno.getId()}">
                     </form>
                 </td>

@@ -14,10 +14,12 @@ import java.util.ArrayList;
 public class Historico {
     
     private ArrayList<AlunoMemento> estadosSalvos = new ArrayList<>();
-    private static int id;
+    private Integer posicaoEstadosSalvos = null;
+    private int id;
 
     public Historico(int id) {
         this.id=id;
+        posicaoEstadosSalvos = 0;
     }
 
     
@@ -29,8 +31,16 @@ public class Historico {
         this.estadosSalvos.add(estadosSalvos);
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }  
+
+    public Integer getPosicaoEstadosSalvos() {
+        return posicaoEstadosSalvos;
+    }
+
+    public void setPosicaoEstadosSalvos(int posicaoEstadosSalvos) {
+        this.posicaoEstadosSalvos = posicaoEstadosSalvos;
+    }
     
 }

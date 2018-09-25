@@ -15,7 +15,7 @@
         <menu>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="Cadastrojsp.jsp">Cadastrar</a></li>
+                <li><a href="Cadastrar.html">Cadastrar</a></li>
             </ul>
         </menu>
     </aside>
