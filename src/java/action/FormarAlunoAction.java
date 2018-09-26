@@ -33,7 +33,13 @@ public class FormarAlunoAction implements Action {
         try {
             RequestDispatcher dispachante = request.getRequestDispatcher("WEB-INF/index.jsp");
             if (id != null) {
-                AlunoDao.getInstance().saveEstado(id, "Formado");
+                Aluno aux = AlunoDao.getInstance().getAlunoByID(id);
+                int ultimmoEstado = AlunoDao.getInstance().getMementos(id).getPosicaoEstadosSalvos();
+                String novoEstado = AlunoDao.getInstance().getMementos(id).getEstadosSalvos().get(ultimmoEstado).toString();
+                aux.setFormado();
+                if (!(aux.getStado().equals(novoEstado))) {
+                    AlunoDao.getInstance().saveEstado(id, aux.getStado());
+                }
             }
             request.setAttribute("alunos", AlunoDao.getInstance().getAlunosBanco());
 

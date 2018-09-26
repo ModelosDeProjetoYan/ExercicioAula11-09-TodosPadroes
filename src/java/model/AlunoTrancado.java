@@ -21,7 +21,6 @@ public class AlunoTrancado implements AlunoEstado{
 
     @Override
     public void setFormado(Aluno a) {
-    
     }
 
     @Override

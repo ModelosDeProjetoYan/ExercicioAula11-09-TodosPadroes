@@ -34,7 +34,30 @@ public class AlunoDao {
     public static AlunoDao getInstance() {
         return instance;
     }
-
+    public Aluno getAlunoByID(int id){
+        Aluno a = new Aluno();
+        Connection conn = null;
+        Statement st = null;
+        ResultSet resultado;
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            resultado = st.executeQuery("select * from USUARIO  where(id = " + id + ")");
+            while (resultado.next()) {
+                a.setId(resultado.getInt("ID"));
+                a.setStatus(action
+                        = ActionFactoryState.create(resultado.getString("SITUACAO")));
+                a.setMatricula(resultado.getString("MATRICULA"));
+                a.setNome(resultado.getString("NOME"));
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+        } finally {
+            closeResoucers(conn, st);
+        }
+        return a;
+    }
     public void save(Aluno aluno) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -65,10 +88,10 @@ public class AlunoDao {
                     .setEstadosSalvos(
                             new AlunoMemento(action = ActionFactoryState.create(estado)));
             mementos.get(testaSePossuiHistorico(id)).setPosicaoEstadosSalvos(
-            mementos.get(testaSePossuiHistorico(id)).getPosicaoEstadosSalvos()+1);
-            for(int i=mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().size()-1;
+                    mementos.get(testaSePossuiHistorico(id)).getPosicaoEstadosSalvos() + 1);
+            for (int i = mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().size() - 1;
                     i > mementos.get(testaSePossuiHistorico(id)).getPosicaoEstadosSalvos();
-                    i--){
+                    i--) {
                 mementos.get(testaSePossuiHistorico(id)).removeHistoricoAntigo(i);
             }
         } catch (SQLException e) {
@@ -111,8 +134,8 @@ public class AlunoDao {
     }
 
     public int testaSePossuiHistorico(int id) {
-        int i=0;
-        while(i < mementos.size() && mementos.get(i).getId() != id){
+        int i = 0;
+        while (i < mementos.size() && mementos.get(i).getId() != id) {
             i++;
         }
         return i;
@@ -158,11 +181,11 @@ public class AlunoDao {
                     closeResoucers(conn, st);
                 }
             }
-        } else if(i == 1){
-            if (elemento != null && elemento >= 0 && 
-                    elemento < mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().size()-1) {
-                a = mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().get(elemento+1);
-                mementos.get(testaSePossuiHistorico(id)).setPosicaoEstadosSalvos(elemento+1);
+        } else if (i == 1) {
+            if (elemento != null && elemento >= 0
+                    && elemento < mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().size() - 1) {
+                a = mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().get(elemento + 1);
+                mementos.get(testaSePossuiHistorico(id)).setPosicaoEstadosSalvos(elemento + 1);
                 try {
                     conn = DatabaseLocator.getInstance().getConnection();
                     st = conn.createStatement();

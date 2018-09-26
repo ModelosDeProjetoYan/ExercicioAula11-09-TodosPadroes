@@ -29,11 +29,16 @@ public class TrancarAlunoAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Integer id = Integer.parseInt(request.getParameter("id"));
-
         try {
             RequestDispatcher dispachante = request.getRequestDispatcher("WEB-INF/index.jsp");
             if (id != null) {
-                AlunoDao.getInstance().saveEstado(id, "Trancado");
+                Aluno aux = AlunoDao.getInstance().getAlunoByID(id);
+                int ultimmoEstado = AlunoDao.getInstance().getMementos(id).getPosicaoEstadosSalvos();
+                String novoEstado = AlunoDao.getInstance().getMementos(id).getEstadosSalvos().get(ultimmoEstado).toString();
+                aux.setTrancado();
+                if (!(aux.getStado().equals(novoEstado))) {
+                    AlunoDao.getInstance().saveEstado(id, aux.getStado());
+                }
             }
             request.setAttribute("alunos", AlunoDao.getInstance().getAlunosBanco());
 
@@ -43,7 +48,7 @@ public class TrancarAlunoAction implements Action {
             response.sendRedirect("erroAoCadastrar.jsp");
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TrancarAlunoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormarAlunoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

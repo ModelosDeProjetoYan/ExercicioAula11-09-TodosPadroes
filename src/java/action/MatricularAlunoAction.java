@@ -33,7 +33,13 @@ public class MatricularAlunoAction implements Action {
         try {
             RequestDispatcher dispachante = request.getRequestDispatcher("WEB-INF/index.jsp");
             if (id != null) {
-                AlunoDao.getInstance().saveEstado(id, "Matriculado");
+                Aluno aux = AlunoDao.getInstance().getAlunoByID(id);
+                int ultimmoEstado = AlunoDao.getInstance().getMementos(id).getPosicaoEstadosSalvos();
+                String novoEstado = AlunoDao.getInstance().getMementos(id).getEstadosSalvos().get(ultimmoEstado).toString();
+                aux.setMatriculado();
+                if (!(aux.getStado().equals(novoEstado))) {
+                    AlunoDao.getInstance().saveEstado(id, aux.getStado());
+                }
             }
             request.setAttribute("alunos", AlunoDao.getInstance().getAlunosBanco());
 
@@ -43,7 +49,7 @@ public class MatricularAlunoAction implements Action {
             response.sendRedirect("erroAoCadastrar.jsp");
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MatricularAlunoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormarAlunoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
