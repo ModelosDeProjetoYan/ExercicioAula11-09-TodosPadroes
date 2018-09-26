@@ -22,7 +22,9 @@ public class Historico {
         posicaoEstadosSalvos = 0;
     }
 
-    
+    public void removeHistoricoAntigo(int i){
+        estadosSalvos.remove(i);
+    }
     public ArrayList<AlunoMemento> getEstadosSalvos() {
         return estadosSalvos;
     }

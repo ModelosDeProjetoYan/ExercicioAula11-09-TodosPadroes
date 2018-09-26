@@ -69,7 +69,7 @@ public class AlunoDao {
             for(int i=mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().size()-1;
                     i > mementos.get(testaSePossuiHistorico(id)).getPosicaoEstadosSalvos();
                     i--){
-                mementos.get(testaSePossuiHistorico(id)).getEstadosSalvos().remove(i);
+                mementos.get(testaSePossuiHistorico(id)).removeHistoricoAntigo(i);
             }
         } catch (SQLException e) {
             throw e;
@@ -175,9 +175,6 @@ public class AlunoDao {
                     closeResoucers(conn, st);
                 }
             }
-        }else{
-            
-        
         }
     }
 }
